@@ -1,0 +1,71 @@
+# here, I used yml file rather than application.properties file. You can use application.properties file if you want.
+# if you use yml or yaml file, you need to know the yml format which a bit different with properties file.
+server:
+  port: 8080
+  servlet:
+    context-path: /serviceA
+
+spring:
+  application:
+    # application name will appear on eureka server and that will be service name which use to communicate with other microservices.
+    name: Service-A
+
+    # below code is to unregister this application to eureka server.
+    # You can set discovery enable to false not to register and default value is true.
+#  cloud:
+#    discovery:
+#      enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      # if your eureka server is not running on port 8761, you also need to change in below defaultZone url.
+      defaultZone: http://localhost:8761/eureka/
+
+
+  #---------------------------------------------------------------------------------------------------------------------------------#
+  #===================== below config code is not necessary if you don't want to use your custom configs. =====================#
+  instance:
+    # set eureka url rather than hard coding eureka server hostname, and it's no need if you don't go with router way.
+    hostname: ${vcap.application.uris[0]:localhost}
+    # you can comment below using ip address rather than hostname if you don't want to use your service with ip address based hostname.
+    prefer-ip-address: true
+    # add lease interval second and exp duration in second which getting all instance registry info time duration from eureka server. Default sending time is 30 seconds for interval and 90 seconds for exp duration time.
+    lease-renewal-interval-in-seconds: 20
+    lease-expiration-duration-in-seconds: 30
+
+
+# Below is config for info and health api, Spring boot actuator provide those api as status of application.
+# For that case, you need to add actuator dependency in pom.xml file.
+# You can call that info and health api via Postman or you can call by clicking the link under status in Eureka Server Dashboard.
+management:
+  endpoints:
+    web:
+      exposure:
+        # health endpoint is open by default and info is not open by default starting from spring 2.5.x,
+        # so if you want info, you need to open info endpoint and if info was included list, you need to add health endpoint as well
+        # because it's override the config. if not so, you can't call health endpoint.
+        include: info, health.
+        # you can also add - beans,env, and you can also add custom endpoint too by adding in class for your custom endpoint.
+
+  # below code is close default health endpoint and info endpoint if you don't want to use it.
+#  endpoint:
+#    health:
+#      enabled: false
+#    info:
+#      enabled: false
+
+
+# below information will be shown after you call info endpoint
+info:
+  application:
+    name: ${spring.application.name}
+    description: Eureka Sample Microservice A by Ye Win.
+    # default delimiter is @. It can use in application.properties, but it's reserved character in application YAML/YML file.
+    # so, if you want to use another delimiter character, you need to config your delimiter in pom.xml file, inside <properties> tag.
+    # here, I used ^ for delimiter variable and added that character in pom.xml.
+    version: ^project.version^
+    spring-cloud-version: ^spring-cloud.version^
+    spring-boot-version: ^project.parent.version^
+    group-id: ^groupId^
+    artifact-id: ^artifactId^
