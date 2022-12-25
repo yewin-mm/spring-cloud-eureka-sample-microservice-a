@@ -50,8 +50,8 @@ and communicate with [Microservice b](https://github.com/yewin-mm/spring-cloud-e
     - [Instruction](#instruction)
       -  [Checking Eureka Server Portal](#check-eureka-server)
       -  [Testing](#testing)
-        -  [Call APIs by Direct](#call-api-direct)
-        -  [Call APIs through Eureka ](#call-api-eureka)
+          -  [Call APIs by Direct](#call-api-direct)
+          -  [Call APIs through Eureka ](#call-api-eureka)
 - [Contact Me](#contact)
 - [Contributing](#Contributing)
 
@@ -193,7 +193,7 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
 * That's what we call Service Discovery, 
   * It's mean one service can discover (can call) easily other services location (ip address) by just giving Service Name.
   * But all services need to register in `Eureka Server`.
-  * Service Discovery will reduce coupling because we can easily migrate(change) our application deployed server, and we don't need to change url to reach that server in caller service.
+  * Service Discovery will reduce coupling because we can easily migrate(change) our application deployed server, and we `don't need to change` url to reach that server again in caller (producer) service.
 
 * Also, You can call `(built-in api) info api (which provided from actuator)` and `(built-in api) health api (which provided from actuator)` APIs too which APIs are provided from Spring Boot Actuator and that's built-in APIs as I don't need to add manually for those APIs.
 
