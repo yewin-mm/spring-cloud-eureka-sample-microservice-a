@@ -80,13 +80,14 @@ Because Eureka can send actual location (ip address) of registered services when
 It's mean, Service B might have many Instances (duplicate service) `for handling thousands requests`.
 * Using Load Balancer, Service A don't need to add url for each Instance location and Load Balancer will auto route to Instance of Service B. <br>
 In this Example, I dropped for Service B and Service B instance. It might have more than one Instance.
-* The advantages of using Client Side Service Discovery is all Services need to add Eureka in application and <br> 
+* The disadvantages of using Client Side Service Discovery is all Services need to add Eureka in application and <br> 
 because if Service don't connect with Eureka, Eureka don't know the service location and can't connect to that service.
-* In modern cloud based service deployment architecture, I `don't recommend` to use `Eureka` and use Server Side Discovery (same logic with Client Side Discovery) not for depending connecting to Discovery from each Service. <br>
+* In modern cloud based service deployment architecture, I `don't recommend` to use `Eureka` and use Server Side Discovery (same logic with Client Side Discovery) not to depend on connecting to Discovery from each Service. <br>
 Using Server Side Discovery, every Service don't need to add code logic for Load Balancing and Load Balance will serve as Separately. <br>
 eg. Kubernetes orchestrate for each Container and involved Load Balancer as native.
 
-Firstly, you should pull [Eureka Server](https://github.com/yewin-mm/spring-cloud-eureka-server) as for server and [Microservice b](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b) and [Microservice b Instance 2](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b-instance2) for testing.
+Firstly, you should pull [Eureka Server](https://github.com/yewin-mm/spring-cloud-eureka-server) as for server and [Microservice b](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b) and [Microservice b Instance 2](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b-instance2) for testing.<br>
+I've dropped [Instructions](#instruction) in below.
 
 <a name="built-with"></a>
 ### 🪓 Built With
