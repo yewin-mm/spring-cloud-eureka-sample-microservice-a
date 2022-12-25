@@ -81,7 +81,7 @@ It's mean, Service B might have many Instances (duplicate service) `for handling
 * Using Load Balancer, Service A don't need to add url for each Instance location and Load Balancer will auto route to Instance of Service B. <br>
 In this Example, I dropped for Service B and Service B instance. It might have more than one Instance.
 * The disadvantages of using Client Side Service Discovery is all Services need to add Eureka in application and <br> 
-because if Service don't connect with Eureka, Eureka don't know the service location and can't connect to that service.
+because if Service don't connect with Eureka, Eureka don't know the service location and other service can't connect to that service through Eureka.
 * In modern cloud based service deployment architecture, I `don't recommend` to use `Eureka` and use Server Side Discovery (same logic with Client Side Discovery) not to depend on connecting to Discovery from each Service. <br>
 Using Server Side Discovery, every Service don't need to add code logic for Load Balancing and Load Balance will serve as Separately. <br>
 eg. Kubernetes orchestrate for each Container and involved Load Balancer as native.
