@@ -132,6 +132,7 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
 <a name="check-eureka-server"></a>
 #### Checking Eureka Server Portal
 * Clone and Run [Eureka Server](https://github.com/yewin-mm/spring-cloud-eureka-server) in your IDE.
+* If you don't run Eureka Server first, you will get error when you run this service, because this service will connect to that server.
 * After run the server, Call Eureka Server Portal `http://localhost:8761/` in browser. [Default Eureka Server Url](http://localhost:8761/).
 * You can see `No Instances available` under `Application` tab under `Instances currently registered with Eureka` in `Eureka Server Portal`.
 * Because you up your server and no instance (application) are connected (register) to this server right now.
@@ -139,7 +140,7 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
 * Refresh in your Eureka Server Portal.
   * There, you can see `SERVICE-A` under `Application` tab and `Up(1)` under Status.
   * There, `Up(1)` mean there has only one instance (one application) which registered in Eureka with name `SERVICE-A`. 
-  * You can see follow by url after Up like `192.168.1.2:Service-A:8080`, and you can click that endpoint to see the `SERVICE-A` application `info` which provided by Spring boot `Actuator`.
+  * You can see follow by url after Up like `192.168.1.2:Service-A:8080`, and you can click that endpoint to see this `SERVICE-A` application `info` which provided by Spring boot `Actuator`.
   * You can also see other Services if you `run` [Microservice b](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b) and [Microservice b Instance 2](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b-instance2) at the same time.
   * After run those above Services, `refresh` eureka portal. But you can't see as two line for those `Service-B` and `Service-B Instance` because it used same Service Name when registered in Eureka server. It's mean you duplicate Service B for handling thousands requests.
   * So, for `Service-B`, you can see `Up(2)` because you run two applications with same Service Name.
@@ -177,7 +178,7 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
     * You can check above message is from which service by checking in your IDE logs, check logs in both `Service B` and `Service B Instance 2` application console logs in your IDE. 
     * Call 4 or 5 times above `through eureka` api again and check logs in `Service B` and `B Instance` again.
     * You can see logs will output in both `Service B` and `B Instance` when these was called by `Service A`.
-    * It's mean `Service -A` can call to both `Service B` and `B Instance` by using one URL as `Round Robin` rule of Load Balancer.
+    * It's mean this `Service-A` can call to both `Service B` and `B Instance` by using one URL as `Round Robin` rule of Load Balancer.
   
   * You can see code in this project for call API through Eureka and this is under `callServiceBFromServiceAThroughEureka` method of `ServiceATestService` class.
   * Surprisingly that `Service-A` need only `Service Name` to call other Services and no need to know URL and also used `only one` url which provided from `Eureka Server` to call `Service B` and `Service B instance`.
