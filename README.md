@@ -76,7 +76,7 @@ Because we might migrate Service B deployed Server and if we changed that the ad
 <br> As an example, we need to change url in RestTemplate to call B when B deployed server was changed. 
 * But using with Service Discovery, we don't need to change the url as we use Service Name instead of using ip:port address when A call to B. <br> 
 Because Eureka can send actual location (ip address) of registered services when one service ask for other services location by Service Name. So, we need only Service Name to call other services.
-* Also, Eureka provide for `Load Balancing` collaboration with Ribbon. <br>
+* Also, Eureka provide for `Load Balancing` collaboration with `Ribbon`. <br>
 It's mean, Service B might have many Instances (duplicate service) `for handling thousands requests`.<br>
 We use that kind of multi instances approach in Enterprise level applications.
 * Using Load Balancer, Service A don't need to add url for each Instance location and Load Balancer will auto route to Instance of Service B. <br>
@@ -141,10 +141,10 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
   * There, `Up(1)` mean there has only one instance (one application) which registered in Eureka with name `SERVICE-A`. 
   * You can see follow by url after Up like `192.168.1.2:Service-A:8080`, and you can click that endpoint to see the `SERVICE-A` application `info` which provided by Spring boot `Actuator`.
   * You can also see other Services if you `run` [Microservice b](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b) and [Microservice b Instance 2](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b-instance2) at the same time.
-  * After run these above Services, `refresh` eureka portal. But you can't see as two line for those `Service-B` and `Service-B Instance` because it used same Service Name when registered in Eureka server. It's mean you duplicate Service B for handling thousands requests.
+  * After run those above Services, `refresh` eureka portal. But you can't see as two line for those `Service-B` and `Service-B Instance` because it used same Service Name when registered in Eureka server. It's mean you duplicate Service B for handling thousands requests.
   * So, for `Service-B`, you can see `Up(2)` because you run two applications with same Service Name.
   * If you down(stop) one service of `Service-B`, you can see `Down(1)` and `Up(1)` under `Status` tab.
-  * So, you can test these three services by stopping, starting applications. And See the `Eureka Server Portal` by refreshing.
+  * So, you can test those three services by stopping, starting applications. And See the `Eureka Server Portal` by refreshing.
 * You can also see `General Info` and `Instance Info` in Eureka Server Portal.
 
 <a name="testing"></a>
@@ -169,7 +169,7 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
 <a name="call-api-eureka"></a>
 ##### Call APIs through Eureka
 * I assumed that you already imported my postman collection as above [Call APIs by Direct](#call-api-direct) guide and already `Run` Service B and B Instance applications.
-  * Open your imported `eureka-client` folder in postman and inside this folder, you will see total of 3 Folder,
+  * Open your imported `eureka-client` folder in postman and inside this folder, you will see total of 3 folders,
   * Open `service-a` folder
     * If not already run, Run [Microservice b](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b) and [Microservice b Instance 2](https://github.com/yewin-mm/spring-cloud-eureka-sample-microservice-b-instance2) applications.
     * Open `(through eureka) call service-b api from service-a` api, click `send` button, 
@@ -180,8 +180,8 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
     * It's mean `Service -A` can call to both `Service B` and `B Instance` by using one URL as `Round Robin` rule of Load Balancer.
   
   * You can see code in this project for call API through Eureka and this is under `callServiceBFromServiceAThroughEureka` method of `ServiceATestService` class.
-  * Surprisingly that `Service -A` used `only one` url which provided from `Eureka Server` to call `Service B` and `Service B instance`.
-  * So, `Eureka` can provide url as `Service Name` which service (application) registered in `Eureka Server`.
+  * Surprisingly that `Service-A` need only `Service Name` to call other Services and no need to know URL and also used `only one` url which provided from `Eureka Server` to call `Service B` and `Service B instance`.
+  * So, `Eureka` can provide url by `Service Name` which service (application) registered in `Eureka Server`.
   * That's what we call Service Discovery, and it's mean one service can discover (can call) easily other services location (ip address) by just giving Service Name. But all services need to register in `Eureka Server`.
 
 * Please note that there can have many services and each service has one or more instances.
@@ -192,7 +192,7 @@ You need to clone [Microservice b](https://github.com/yewin-mm/spring-cloud-eure
   * In real world applications, we do separate many instances for one service because it can handle well `thousands requests`.
 
 * That's what we call Service Discovery, 
-  * It's mean one service can discover (can call) easily other services location (ip address) by just giving Service Name.
+  * It's mean one service can discover (can call) easily other services location (ip address) by `just giving only Service Name`.
   * But all services need to register in `Eureka Server`.
   * Service Discovery will reduce coupling because we can easily migrate(change) our application deployed server, and we `don't need to change` url to reach that server again in caller (producer) service.
 
