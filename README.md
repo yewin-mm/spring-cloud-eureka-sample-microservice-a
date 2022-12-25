@@ -77,7 +77,8 @@ Because we might migrate Service B deployed Server and if we changed that the ad
 * But using with Service Discovery, we don't need to change the url as we use Service Name instead of using ip:port address when A call to B. <br> 
 Because Eureka can send actual location (ip address) of registered services when one service ask for other services location by Service Name. So, we need only Service Name to call other services.
 * Also, Eureka provide for `Load Balancing` collaboration with Ribbon. <br>
-It's mean, Service B might have many Instances (duplicate service) `for handling thousands requests`.
+It's mean, Service B might have many Instances (duplicate service) `for handling thousands requests`.<br>
+We use that kind of multi instances approach in Enterprise level applications.
 * Using Load Balancer, Service A don't need to add url for each Instance location and Load Balancer will auto route to Instance of Service B. <br>
 In this Example, I dropped for Service B and Service B instance. It might have more than one Instance.
 * The disadvantages of using Client Side Service Discovery is all Services need to add Eureka in application and <br> 
